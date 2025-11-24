@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="homepage.html">The Platinum Plan</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="eventlisting.html">Event Listing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="detail.html">Event Detail</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="contactpage.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <h2 class="text-center mb-4">Get In Touch 👋</h2>
+
+                <div class="card p-4 shadow-sm custom-card">
+                    <form id="contactForm" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                            <div class="invalid-feedback">Name is required!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                            <div class="invalid-feedback">Enter a valid email address!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="text" id="mobile" class="form-control" required>
+                            <div class="invalid-feedback">Enter a valid 10-digit mobile number!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea id="message" class="form-control" rows="4" required></textarea>
+                            <div class="invalid-feedback">Message cannot be empty!</div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary custom-btn">Send Message</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+            let isValid = true;
+
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const mobile = document.getElementById("mobile");
+            const message = document.getElementById("message");
+            
+            if (name.value.trim() === "") {
+                name.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                name.classList.remove("is-invalid");
+            }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value.trim())) {
+                email.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                email.classList.remove("is-invalid");
+            }
+            
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile.value.trim())) {
+                mobile.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                mobile.classList.remove("is-invalid");
+            }
+            
+            if (message.value.trim() === "") {
+                message.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                message.classList.remove("is-invalid");
+            }
+
+            if (isValid) {
+                alert("Thank you! Your message has been sent successfully 🙂");
+                this.reset();
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="event-style.css">
+</head>
+<body>
+
+    <div class="registration-container" style="font-size: medium;" style="background-color: aqua;">
+        <h2>🗓️ Register for the Birthday Party</h2>
+        <p class="event-info">Heartly Welcome to The Platinum Plan</p>
+        
+        <form id="eventRegistrationForm" onsubmit="return validateEventForm()">
+            
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+                <small id="fullNameError" class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Work Email Address:</label>
+                <input type="email" id="email" name="email" required>
+                <small id="emailError" class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="attendeeType">I am attending as:</label>
+                <select id="attendeeType" name="attendeeType" required>
+                    <option value="">-- Select an option --</option>
+                    <option value="developer">Developer</option>
+                    <option value="designer">Designer</option>
+                    <option value="manager">Manager</option>
+                    <option value="Software Developer">Software Developer</option>
+                </select>
+                <small id="attendeeTypeError" class="error-message"></small>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">Terms and Conditions Accepted</label>
+            </div>
+            
+            <button type="submit">Complete Registration</button>
+        </form>
+    </div>
+
+    <script>
+        function displayError(id, message) {
+    const element = document.getElementById(id);
+    element.textContent = message;
+}
+
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.error-message');
+    errorElements.forEach(el => el.textContent = '');
+}
+
+function validateEventForm() {
+    let isValid = true;
+    clearErrors();
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const attendeeType = document.getElementById('attendeeType').value;
+    if (fullName.length < 3) {
+        displayError('fullNameError', 'Please enter your full name.');
+        isValid = false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        displayError('emailError', 'Please enter a valid work email address.');
+        isValid = false;
+    }
+    if (isValid) {
+        alert(`Registration for ${fullName} successful! We sent your invitation card to ${email}.`);
+    }
+    return false;
+}
+    </script>
+</body>
+</html>
